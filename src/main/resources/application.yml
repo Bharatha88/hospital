@@ -1,0 +1,8 @@
+spring :
+  datasource :
+    url : jdbc:mysql://localhost:3306/hospital_crm
+    username : root
+    password : Isuru@1988
+  jpa :
+    hibernate :
+      ddl-auto : update
