@@ -3,31 +3,36 @@ package com.hospital.service.impl;
 
 import com.hospital.dao.PatientEntity;
 import com.hospital.dto.Patient;
+import com.hospital.repository.PatientNativeRepository;
 import com.hospital.repository.PatientRepository;
 import com.hospital.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public abstract class PatientServiceImpl implements PatientService {
+public  class PatientServiceImpl implements PatientService {
 
     @Autowired
     PatientRepository patientRepository;
 
+    @Autowired
+    PatientNativeRepository patientNativeRepository;
+
     //save patient
-    public void registerPatient(Patient patient){
-        PatientEntity entity = new PatientEntity();
-        entity.setAppointmentNumber(patient.getAppointmentNumber());
-        entity.setFirstName(patient.getFirstName());
-        entity.setLastName(patient.getLastName());
-        entity.setDob(patient.getDob());
-        entity.setPhoneNumber(patient.getPhoneNumber());
-        patientRepository.save(entity);
+    public void createPatient(Patient patient){
+        PatientEntity model = new PatientEntity();
+        model.setFirstName(patient.getFirstName());
+        model.setLastName(patient.getLastName());
+        model.setDob(patient.getDob());
+        model.setPhoneNumber(patient.getPhoneNumber());
+        patientRepository.save(model);
 
     }
 
@@ -44,8 +49,8 @@ public abstract class PatientServiceImpl implements PatientService {
 
              patientModelList.add(
                      Patient.builder()
-                         .appointmentNumber(patientDao.getAppointmentNumber())
-                         .firstName(patientDao.getFirstName())
+                             .id(patientDao.getId())
+                             .firstName(patientDao.getFirstName())
                          .lastName(patientDao.getLastName())
                          .dob(patientDao.getDob())
                          .phoneNumber(patientDao.getPhoneNumber())
@@ -65,7 +70,21 @@ public abstract class PatientServiceImpl implements PatientService {
     public Iterable<PatientEntity> retrievePatientByLastName(String lastName){
         return patientRepository.findAllByLastName(lastName);
     }
-}
+
+    public Boolean removePatient(Long patientId) {
+        //using JPA
+        Optional<PatientEntity> patientById = patientRepository.findById(patientId);
+        if(patientById.isPresent()){
+        patientRepository.deleteById(patientId);
+         return true;
+         }
+        return false;
+        }
+
+        //using native method
+        //return patientNativeRepository.removePatient(patientId);
+    }
+
 
 
 

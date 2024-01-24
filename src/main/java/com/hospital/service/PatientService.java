@@ -17,8 +17,6 @@ public interface  PatientService {
 
     Iterable<PatientEntity> retrievePatientByLastName(String lastName);
 
+    Boolean removePatient(Long patientId);
 
-
-
-    //Boolean removePatient(Long appointmentNumber);
 }
