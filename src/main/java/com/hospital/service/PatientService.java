@@ -6,7 +6,7 @@ import com.hospital.dto.Patient;
 
 import java.util.List;
 
-public interface  PatientService {
+public interface PatientService {
 
 
     void createPatient(Patient patient);
@@ -18,5 +18,6 @@ public interface  PatientService {
     Iterable<PatientEntity> retrievePatientByLastName(String lastName);
 
     Boolean removePatient(Long patientId);
+
 
 }

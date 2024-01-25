@@ -3,11 +3,9 @@ package com.hospital.service.impl;
 
 import com.hospital.dao.PatientEntity;
 import com.hospital.dto.Patient;
-import com.hospital.repository.PatientNativeRepository;
 import com.hospital.repository.PatientRepository;
 import com.hospital.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 
@@ -22,9 +20,7 @@ public  class PatientServiceImpl implements PatientService {
     @Autowired
     PatientRepository patientRepository;
 
-    @Autowired
-    PatientNativeRepository patientNativeRepository;
-
+    
     //save patient
     public void createPatient(Patient patient){
         PatientEntity model = new PatientEntity();
@@ -81,9 +77,8 @@ public  class PatientServiceImpl implements PatientService {
         return false;
         }
 
-        //using native method
-        //return patientNativeRepository.removePatient(patientId);
-    }
+
+}
 
 
 
