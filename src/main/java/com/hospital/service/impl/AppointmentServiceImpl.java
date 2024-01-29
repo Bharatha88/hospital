@@ -21,7 +21,7 @@ public  class AppointmentServiceImpl implements AppointmentService {
     AppointmentRepository appointmentRepository;
 
 
-    //save patient
+    //save Appointment
     public void createAppointment(Appointment appointment){
         AppointmentEntity model = new AppointmentEntity();
         model.setDoctorName(appointment.getDoctorName());
@@ -32,11 +32,18 @@ public  class AppointmentServiceImpl implements AppointmentService {
 
     }
 
-    //retrieve all patient
-    public List<Appointment> retrieveAllAppointments(){
-        Iterable<AppointmentEntity> appointmentList = appointmentRepository.findAll();
+    //retrieve all appointment
+    public List<Appointment> retrieveAllAppointments(String doctorName, String patientName){
+        Iterable<AppointmentEntity> appointments;
+        if (doctorName != null){
+            appointments = retrieveAppointmentByDoctorName(doctorName);
+        } else if (patientName != null){
+            appointments = retrieveAppointmentByPatientName(patientName);
+        } else {
+            appointments = appointmentRepository.findAll();
+        }
 
-        Iterator<AppointmentEntity>  iterator = appointmentList.iterator();
+        Iterator<AppointmentEntity>  iterator = appointments.iterator();
 
         List<Appointment> appointmentModelList = new ArrayList<>();
 
@@ -67,6 +74,7 @@ public  class AppointmentServiceImpl implements AppointmentService {
         return appointmentRepository.findAllByPatientName(patientName);
     }
 
+    //Delete Appointment
     public Boolean removeAppointment(Long appointmentId) {
         //using JPA
         Optional<AppointmentEntity> appointmentById = appointmentRepository.findById(appointmentId);
@@ -76,7 +84,6 @@ public  class AppointmentServiceImpl implements AppointmentService {
         }
         return false;
     }
-
 
 }
 

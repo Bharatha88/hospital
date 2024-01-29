@@ -11,7 +11,7 @@ public interface PatientService {
 
     void createPatient(Patient patient);
 
-    List<Patient> retrieveAllPatients();
+    List<Patient> retrieveAllPatients(String firstName, String lastName);
 
     Iterable<PatientEntity> retrievePatientByFirstName(String firstName);
 

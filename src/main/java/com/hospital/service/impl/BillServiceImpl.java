@@ -31,10 +31,16 @@ public  class BillServiceImpl implements BillService {
     }
 
     //retrieve all bill
-    public List<Bill> retrieveAllBills(){
-        Iterable<BillEntity> billList = billRepository.findAll();
+    public List<Bill> retrieveAllBills(String billNumber){
+        Iterable<BillEntity> bills;
+        if (billNumber != null){
+            bills = retrieveBillByBillNumber(billNumber);
+        } else{
+            bills = billRepository.findAll();
+        }
 
-        Iterator<BillEntity>  iterator = billList.iterator();
+            Iterator<BillEntity> iterator = bills.iterator();
+
 
         List<Bill> billModelList = new ArrayList<>();
 

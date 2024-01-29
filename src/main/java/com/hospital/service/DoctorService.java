@@ -12,7 +12,7 @@ public interface  DoctorService {
 
     void createDoctor(Doctor doctor);
 
-    List<Doctor> retrieveAllDoctors();
+    List<Doctor> retrieveAllDoctors(String firstName, String lastName);
 
     Iterable<DoctorEntity> retrieveDoctorByFirstName(String firstName);
 

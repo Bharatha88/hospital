@@ -38,7 +38,7 @@ public class ItemController {
     }
 
     //GetItem from data using  name - path variable
-    @GetMapping("/{Name}")
+    @GetMapping("/{name}")
     public Iterable<ItemEntity> retrieveItemsName(
             @PathVariable String  Name){
         return service.retrieveItemByName(Name);

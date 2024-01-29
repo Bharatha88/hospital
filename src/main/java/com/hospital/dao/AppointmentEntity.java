@@ -1,12 +1,11 @@
 package com.hospital.dao;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 
 @Data
@@ -20,6 +19,7 @@ public class AppointmentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String appointmentNumber;
     private String doctorName;
     private String patientName;
     private String status;

@@ -24,24 +24,11 @@ public class PatientController {
         service.createPatient(patient);
 
     }
+
     //GetPatients from Database
     @GetMapping
-    public List<Patient> retrieveAllPatients(){
-        return service.retrieveAllPatients();
-    }
-
-    //GetPatient data using first name - path variable
-    @GetMapping("/{firstName}")
-    public Iterable<PatientEntity> retrievePatientFirstName(
-            @PathVariable String firstName){
-        return service.retrievePatientByFirstName(firstName);
-    }
-
-    //GetPatient data using last name - path variable
-    @GetMapping("/{lastName}")
-    public Iterable<PatientEntity> retrievePatientLastName(
-            @PathVariable String lastName){
-        return service.retrievePatientByLastName(lastName);
+    public List<Patient> retrieveAllPatients(@RequestParam(required = false) String firstName, @RequestParam(required = false) String lastName){
+        return service.retrieveAllPatients(firstName, lastName);
     }
 
     @DeleteMapping("/{patientId}")

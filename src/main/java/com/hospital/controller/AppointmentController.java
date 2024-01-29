@@ -2,6 +2,7 @@ package com.hospital.controller;
 
 import com.hospital.dao.AppointmentEntity;
 import com.hospital.dto.Appointment;
+import com.hospital.dto.Patient;
 import com.hospital.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +27,8 @@ public class AppointmentController {
     }
     //GetPatients from Database
     @GetMapping
-    public List<Appointment> retrieveAllAppointments(){
-        return service.retrieveAllAppointments();
+    public List<Appointment> retrieveAllAppointments(@RequestParam(required = false) String doctorName, @RequestParam(required = false) String patientName){
+        return service.retrieveAllAppointments(doctorName, patientName);
     }
 
     //GetPatient data using first name - path variable

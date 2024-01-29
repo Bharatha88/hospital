@@ -10,7 +10,7 @@ public interface ElementService {
 
     void createElement(Element element);
 
-    List<Element> retrieveAllElements();
+    List<Element> retrieveAllElements(String elementNumber);
 
     Iterable<ElementEntity> retrieveElementByElementNumber(String elementNumber);
 

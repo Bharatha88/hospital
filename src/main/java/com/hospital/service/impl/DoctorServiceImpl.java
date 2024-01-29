@@ -34,10 +34,17 @@ public  class DoctorServiceImpl implements DoctorService {
     }
 
     //retrieve all doctors
-    public List<Doctor> retrieveAllDoctors(){
-        Iterable<DoctorEntity> doctorList = doctorRepository.findAll();
+    public List<Doctor> retrieveAllDoctors(String firstName, String lastName){
+        Iterable<DoctorEntity> doctors;
+        if (firstName != null){
+            doctors = retrieveDoctorByFirstName(firstName);
+        } else if (lastName != null){
+            doctors = retrieveDoctorByLastName(lastName);
+        } else {
+            doctors = doctorRepository.findAll();
+        }
 
-        Iterator<DoctorEntity>  iterator = doctorList.iterator();
+        Iterator<DoctorEntity>  iterator = doctors.iterator();
 
         List<Doctor> doctorModelList = new ArrayList<>();
 

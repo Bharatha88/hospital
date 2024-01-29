@@ -10,7 +10,7 @@ public interface BillService {
 
     void createBill(Bill bill);
 
-    List<Bill> retrieveAllBills();
+    List<Bill> retrieveAllBills(String billNumber);
 
     Iterable<BillEntity> retrieveBillByBillNumber(String billNumber);
 

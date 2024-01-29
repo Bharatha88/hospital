@@ -12,7 +12,7 @@ public interface  AppointmentService {
 
     void createAppointment(Appointment appointment);
 
-    List<Appointment> retrieveAllAppointments();
+    List<Appointment> retrieveAllAppointments(String doctorName, String patientName);
 
     Iterable<AppointmentEntity> retrieveAppointmentByDoctorName(String doctorName);
 

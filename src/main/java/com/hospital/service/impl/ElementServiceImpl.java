@@ -32,10 +32,16 @@ public  class ElementServiceImpl implements ElementService {
     }
 
     //retrieve all element
-    public List<Element> retrieveAllElements(){
-        Iterable<ElementEntity> elementList = elementRepository.findAll();
+    public List<Element> retrieveAllElements(String elementNumber){
+        Iterable<ElementEntity> elements;
+        if (elementNumber != null){
+            elements = retrieveElementByElementNumber(elementNumber);
+        } else{
+            elements = elementRepository.findAll();
+        }
 
-        Iterator<ElementEntity>  iterator = elementList.iterator();
+        Iterator<ElementEntity> iterator = elements.iterator();
+
 
         List<Element> elementModelList = new ArrayList<>();
 

@@ -20,7 +20,7 @@ public  class PatientServiceImpl implements PatientService {
     @Autowired
     PatientRepository patientRepository;
 
-    
+
     //save patient
     public void createPatient(Patient patient){
         PatientEntity model = new PatientEntity();
@@ -33,10 +33,17 @@ public  class PatientServiceImpl implements PatientService {
     }
 
     //retrieve all patient
-    public List<Patient> retrieveAllPatients(){
-         Iterable<PatientEntity> patientList = patientRepository.findAll();
+    public List<Patient> retrieveAllPatients(String firstName, String lastName){
+        Iterable<PatientEntity> patients;
+        if (firstName != null){
+            patients = retrievePatientByFirstName(firstName);
+        } else if (lastName != null){
+            patients = retrievePatientByLastName(lastName);
+        } else {
+             patients = patientRepository.findAll();
+        }
 
-         Iterator<PatientEntity>  iterator = patientList.iterator();
+         Iterator<PatientEntity>  iterator = patients.iterator();
 
          List<Patient> patientModelList = new ArrayList<>();
 

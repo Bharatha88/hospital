@@ -1,6 +1,5 @@
 package com.hospital.controller;
 
-import com.hospital.dao.BillEntity;
 import com.hospital.dto.Bill;
 import com.hospital.service.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,17 +25,9 @@ public class BillController {
     }
     //Get bill from database
     @GetMapping
-    public List<Bill> retrieveAllBills(){
-        return service.retrieveAllBills();
+    public List<Bill> retrieveAllBills(@RequestParam(required = false) String billNumber) {
+        return service.retrieveAllBills(billNumber);
     }
-
-    //Get bill data using first name - path variable
-    @GetMapping("/{billNumber}")
-    public Iterable<BillEntity> retrieveBillsBillNumber(
-            @PathVariable String billNumber){
-        return service.retrieveBillByBillNumber(billNumber);
-    }
-
 
     //Delete bill from DB
     @DeleteMapping("/{billId}")

@@ -32,10 +32,17 @@ public  class AdminServiceImpl implements AdminService {
     }
 
     //retrieve all admin
-    public List<Admin> retrieveAllAdmins(){
-        Iterable<AdminEntity> adminList = adminRepository.findAll();
+    public List<Admin> retrieveAllAdmins(String firstName, String lastName){
+        Iterable<AdminEntity> admins;
+        if (firstName != null){
+            admins = retrieveAdminByFirstName(firstName);
+        } else if (lastName != null){
+            admins = retrieveAdminByLastName(lastName);
+        } else {
+            admins = adminRepository.findAll();
+        }
 
-        Iterator<AdminEntity>  iterator = adminList.iterator();
+        Iterator<AdminEntity>  iterator = admins.iterator();
 
         List<Admin> adminModelList = new ArrayList<>();
 

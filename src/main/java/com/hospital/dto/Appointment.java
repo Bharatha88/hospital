@@ -16,6 +16,7 @@ public class Appointment {
 
     //Variables and data transfer objects
     private Long id;
+    private String appointmentNumber;
     private String doctorName;
     private String patientName;
     private String status;

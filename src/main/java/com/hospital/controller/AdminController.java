@@ -1,6 +1,5 @@
 package com.hospital.controller;
 
-import com.hospital.dao.AdminEntity;
 import com.hospital.dto.Admin;
 import com.hospital.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,22 +25,8 @@ public class AdminController {
     }
     //GetAdmin from Database
     @GetMapping
-    public List<Admin> retrieveAllAdmins(){
-        return service.retrieveAllAdmins();
-    }
-
-    //Get Admin data using first name - path variable
-    @GetMapping("/{firstName}")
-    public Iterable<AdminEntity> retrieveAdminsFirstName(
-            @PathVariable String firstName){
-        return service.retrieveAdminByFirstName(firstName);
-    }
-
-    //Get Admin using last name - path variable
-    @GetMapping("/{lastName}")
-    public Iterable<AdminEntity> retrieveAdminsLastName(
-            @PathVariable String lastName){
-        return service.retrieveAdminByLastName(lastName);
+    public List<Admin> retrieveAllAdmins(@RequestParam(required = false) String firstName, @RequestParam(required = false) String lastName) {
+        return service.retrieveAllAdmins(firstName, lastName);
     }
 
     //Delete Admin from DB

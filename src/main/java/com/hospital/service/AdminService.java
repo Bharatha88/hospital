@@ -11,7 +11,7 @@ public interface AdminService {
 
     void createAdmin(Admin admin);
 
-    List<Admin> retrieveAllAdmins();
+    List<Admin> retrieveAllAdmins(String firstName, String lastName);
 
     Iterable<AdminEntity> retrieveAdminByFirstName(String firstName);
 

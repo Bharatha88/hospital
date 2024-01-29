@@ -1,7 +1,5 @@
 package com.hospital.controller;
 
-;
-import com.hospital.dao.DoctorEntity;
 import com.hospital.dto.Doctor;
 import com.hospital.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,22 +25,8 @@ public class DoctorController {
     }
     //Getdoctor from Database
     @GetMapping
-    public List<Doctor> retrieveAllDoctors(){
-        return service.retrieveAllDoctors();
-    }
-
-    //GetDoctor data using first name - path variable
-    @GetMapping("/{firstName}")
-    public Iterable<DoctorEntity> retrieveDoctorFirstName(
-            @PathVariable String firstName){
-        return service.retrieveDoctorByFirstName(firstName);
-    }
-
-    //GetDoctor data using last name - path variable
-    @GetMapping("/{lastName}")
-    public Iterable<DoctorEntity> retrieveDoctorLastName(
-            @PathVariable String lastName){
-        return service.retrieveDoctorByLastName(lastName);
+    public List<Doctor> retrieveAllDoctors(@RequestParam(required = false) String firstName, @RequestParam(required = false) String lastName){
+        return service.retrieveAllDoctors(firstName, lastName);
     }
 
     //Delete doctor from DB

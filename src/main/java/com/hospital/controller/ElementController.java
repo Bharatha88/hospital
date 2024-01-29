@@ -1,6 +1,5 @@
 package com.hospital.controller;
 
-import com.hospital.dao.ElementEntity;
 import com.hospital.dto.Element;
 import com.hospital.service.ElementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,15 +25,8 @@ public class ElementController {
     }
     //Get element from Database
     @GetMapping
-    public List<Element> retrieveAllElements(){
-        return service.retrieveAllElements();
-    }
-
-    //Get element data using element number - path variable
-    @GetMapping("/{elementNumber}")
-    public Iterable<ElementEntity> retrieveElementsElementNumber(
-            @PathVariable String elementNumber){
-        return service.retrieveElementByElementNumber(elementNumber);
+    public List<Element> retrieveAllElements(@RequestParam(required = false) String elementNumber) {
+        return service.retrieveAllElements(elementNumber);
     }
 
     //Delete element from DB
