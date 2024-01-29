@@ -1,7 +1,5 @@
 package com.hospital.controller;
 
-
-
 import com.hospital.dto.Specialization;
 import com.hospital.service.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +23,7 @@ public class SpecializationController {
         service.createSpecialization(specialization);
 
     }
-    //Getspecialization from Database
+    //Get specialization from Database
     @GetMapping
     public List<Specialization> retrieveAllSpecializations(){
         return service.retrieveAllSpecializations();

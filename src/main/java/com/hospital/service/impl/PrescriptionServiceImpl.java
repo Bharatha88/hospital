@@ -33,10 +33,16 @@ public  class  PrescriptionServiceImpl  implements PrescriptionService  {
     }
 
     //retrieve all appointment
-    public List<Prescription> retrieveAllPrescriptions(){
-        Iterable<PrescriptionEntity> prescriptionList = prescriptionRepository.findAll();
+    public List<Prescription> retrieveAllPrescriptions(String prescriptionNumber){
+        Iterable<PrescriptionEntity> prescriptions;
+        if (prescriptionNumber != null){
+            prescriptions = retrievePrescriptionByPrescriptionNumber(prescriptionNumber);
+        } else{
+            prescriptions = prescriptionRepository.findAll();
+        }
 
-        Iterator<PrescriptionEntity>  iterator = prescriptionList.iterator();
+        Iterator<PrescriptionEntity> iterator = prescriptions.iterator();
+
 
         List<Prescription> prescriptionModelList = new ArrayList<>();
 

@@ -1,6 +1,5 @@
 package com.hospital.controller;
 
-import com.hospital.dao.ReviewEntity;
 import com.hospital.dto.Review;
 import com.hospital.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,15 +25,8 @@ public class ReviewController {
     }
     //Get review from Database
     @GetMapping
-    public List<Review> retrieveAllReviews(){
-        return service.retrieveAllReviews();
-    }
-
-    //Get review data using review number - path variable
-    @GetMapping("/{reviewNumber}")
-    public Iterable<ReviewEntity> retrieveReviewsReviewNumber(
-            @PathVariable String reviewNumber){
-        return service.retrieveReviewByReviewNumber(reviewNumber);
+    public List<Review> retrieveAllReviews(@RequestParam(required = false) String reviewNumber) {
+        return service.retrieveAllReviews(reviewNumber);
     }
 
     //Delete review from DB

@@ -1,6 +1,5 @@
 package com.hospital.controller;
 
-import com.hospital.dao.ItemEntity;
 import com.hospital.dto.Item;
 import com.hospital.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,22 +25,8 @@ public class ItemController {
     }
     //GetItem from Database
     @GetMapping
-    public List<Item> retrieveAllItems(){
-        return service.retrieveAllItems();
-    }
-
-    //GetItem data using code - path variable
-    @GetMapping("/{code}")
-    public Iterable<ItemEntity> retrieveItemsCode(
-            @PathVariable String code){
-        return service.retrieveItemByCode(code);
-    }
-
-    //GetItem from data using  name - path variable
-    @GetMapping("/{name}")
-    public Iterable<ItemEntity> retrieveItemsName(
-            @PathVariable String  Name){
-        return service.retrieveItemByName(Name);
+    public List<Item> retrieveAllItems(@RequestParam(required = false) String code, @RequestParam(required = false) String name){
+        return service.retrieveAllItems(code, name);
     }
 
     //Delete Appointment from DB

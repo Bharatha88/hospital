@@ -10,7 +10,7 @@ public interface ItemService {
 
     void createItem(Item item);
 
-    List<Item> retrieveAllItems();
+    List<Item> retrieveAllItems(String code, String name);
 
 
     Iterable<ItemEntity> retrieveItemByCode(String code);

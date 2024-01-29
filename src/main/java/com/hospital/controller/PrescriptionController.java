@@ -1,7 +1,6 @@
 package com.hospital.controller;
 
 
-import com.hospital.dao.PrescriptionEntity;
 import com.hospital.dto.Prescription;
 import com.hospital.service.PrescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +26,8 @@ public class PrescriptionController {
     }
     //GetPrescription from Database
     @GetMapping
-    public List<Prescription> retrieveAllPrescriptions(){
-        return service.retrieveAllPrescriptions();
-    }
-    //GetPrescription data using description number - path variable
-    @GetMapping("/{descriptionNumber}")
-    public Iterable<PrescriptionEntity> retrievePrescriptionDescriptionNumber(
-            @PathVariable String descriptionNumber){
-        return service.retrievePrescriptionByPrescriptionNumber(descriptionNumber);
+    public List<Prescription> retrieveAllPrescriptions(@RequestParam(required = false) String prescriptionNumber) {
+        return service.retrieveAllPrescriptions(prescriptionNumber);
     }
 
     //Delete Prescription from DB

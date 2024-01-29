@@ -32,10 +32,17 @@ public  class ItemServiceImpl implements ItemService {
     }
 
     //retrieve all item
-    public List<Item> retrieveAllItems(){
-        Iterable<ItemEntity> itemList = itemRepository.findAll();
+    public List<Item> retrieveAllItems(String code, String name){
+        Iterable<ItemEntity> items;
+        if (code != null){
+            items = retrieveItemByCode(code);
+        } else if (name != null){
+            items = retrieveItemByName(name);
+        } else {
+            items = itemRepository.findAll();
+        }
 
-        Iterator<ItemEntity>  iterator = itemList.iterator();
+        Iterator<ItemEntity>  iterator = items.iterator();
 
         List<Item> itemModelList = new ArrayList<>();
 

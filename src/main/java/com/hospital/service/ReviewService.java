@@ -10,7 +10,7 @@ public interface ReviewService {
 
     void createReview(Review review);
 
-    List<Review> retrieveAllReviews();
+    List<Review> retrieveAllReviews(String reviewNumber);
 
     Iterable<ReviewEntity> retrieveReviewByReviewNumber(String reviewNumber);
 

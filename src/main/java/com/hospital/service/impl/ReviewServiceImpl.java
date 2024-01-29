@@ -31,10 +31,16 @@ public  class ReviewServiceImpl implements ReviewService {
     }
 
     //retrieve all reviews
-    public List<Review> retrieveAllReviews(){
-        Iterable<ReviewEntity> reviewList = reviewRepository.findAll();
+    public List<Review> retrieveAllReviews(String reviewNumber){
+        Iterable<ReviewEntity> reviews;
+        if (reviewNumber != null){
+            reviews = retrieveReviewByReviewNumber(reviewNumber);
+        } else{
+            reviews = reviewRepository.findAll();
+        }
 
-        Iterator<ReviewEntity>  iterator = reviewList.iterator();
+        Iterator<ReviewEntity> iterator = reviews.iterator();
+
 
         List<Review> reviewModelList = new ArrayList<>();
 

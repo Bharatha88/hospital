@@ -11,7 +11,7 @@ public interface PrescriptionService {
 
     void createPrescription(Prescription prescription);
 
-    List<Prescription> retrieveAllPrescriptions();
+    List<Prescription> retrieveAllPrescriptions(String prescriptionNumber);
 
     Iterable<PrescriptionEntity> retrievePrescriptionByPrescriptionNumber(String prescriptionNumber);
 
