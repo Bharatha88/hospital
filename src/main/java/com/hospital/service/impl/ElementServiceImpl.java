@@ -77,6 +77,29 @@ public  class ElementServiceImpl implements ElementService {
         return false;
     }
 
+    //Update element
+    public boolean updateElement(Long elementId, Element updatedElement) {
+        Optional<ElementEntity> elementOptional = elementRepository.findById(elementId);
+
+        if (elementOptional.isPresent()) {
+            ElementEntity existingElement = elementOptional.get();
+
+            // Update the existing element with the new information
+            existingElement.setElementNumber(updatedElement.getElementNumber());
+            existingElement.setUnitPrice(updatedElement.getUnitPrice());
+            existingElement.setDescription(updatedElement.getDescription());
+            existingElement.setQuantity(updatedElement.getQuantity());
+
+            // Save the updated element back to the repository
+            elementRepository.save(existingElement);
+
+            return true;
+        }
+
+        // Patient with the given ID not found
+        return false;
+    }
+
 }
 
 

@@ -2,6 +2,7 @@ package com.hospital.service;
 
 import com.hospital.dao.AdminEntity;
 import com.hospital.dto.Admin;
+import com.hospital.dto.Patient;
 
 
 import java.util.List;
@@ -18,6 +19,7 @@ public interface AdminService {
     Iterable<AdminEntity> retrieveAdminByLastName(String lastName);
 
     Boolean removeAdmin(Long adminId);
+    boolean updateAdmin(Long adminId, Admin updatedAdmin);
 
 
 }

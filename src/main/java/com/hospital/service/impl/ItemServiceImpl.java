@@ -1,7 +1,9 @@
 package com.hospital.service.impl;
 
 
+import com.hospital.dao.ElementEntity;
 import com.hospital.dao.ItemEntity;
+import com.hospital.dto.Element;
 import com.hospital.dto.Item;
 import com.hospital.repository.ItemRepository;
 import com.hospital.service.ItemService;
@@ -81,6 +83,29 @@ public  class ItemServiceImpl implements ItemService {
             itemRepository.deleteById(itemId);
             return true;
         }
+        return false;
+    }
+
+    //Update item
+    public boolean updateItem(Long itemId, Item updatedItem) {
+        Optional<ItemEntity> itemOptional = itemRepository.findById(itemId);
+
+        if (itemOptional.isPresent()) {
+            ItemEntity existingItem = itemOptional.get();
+
+            // Update the existing item with the new information
+            existingItem.setCode(updatedItem.getCode());
+            existingItem.setName(updatedItem.getName());
+            existingItem.setDescription(updatedItem.getDescription());
+            existingItem.setDirection(updatedItem.getDirection());
+
+            // Save the updated item back to the repository
+            itemRepository.save(existingItem);
+
+            return true;
+        }
+
+        // Patient with the given ID not found
         return false;
     }
 

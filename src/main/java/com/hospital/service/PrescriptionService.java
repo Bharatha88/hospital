@@ -2,6 +2,7 @@ package com.hospital.service;
 
 
 import com.hospital.dao.PrescriptionEntity;
+import com.hospital.dto.Patient;
 import com.hospital.dto.Prescription;
 
 import java.util.List;
@@ -17,6 +18,8 @@ public interface PrescriptionService {
 
 
     Boolean removePrescription(Long prescriptionId);
+
+    boolean updatePrescription(Long prescriptionId, Prescription updatedPrescription);
 
 
 }

@@ -75,6 +75,28 @@ public  class BillServiceImpl implements BillService {
         return false;
     }
 
+    //Update appointment
+    public boolean updateBill(Long billId, Bill updatedBill) {
+        Optional<BillEntity> billOptional = billRepository.findById(billId);
+
+        if (billOptional.isPresent()) {
+            BillEntity existingBIll = billOptional.get();
+
+            // Update the existing bill with the new information
+            existingBIll.setBillNumber(updatedBill.getBillNumber());
+            existingBIll.setAmount(updatedBill.getAmount());
+            existingBIll.setDate(updatedBill.getDate());
+
+            // Save the updated bill back to the repository
+            billRepository.save(existingBIll);
+
+            return true;
+        }
+
+        // Patient with the given ID not found
+        return false;
+    }
+
 }
 
 

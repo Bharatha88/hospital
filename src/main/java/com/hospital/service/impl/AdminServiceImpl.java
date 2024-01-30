@@ -83,6 +83,29 @@ public  class AdminServiceImpl implements AdminService {
         return false;
     }
 
+    //Update admin
+    public boolean updateAdmin(Long adminId, Admin updatedAdmin) {
+        Optional<AdminEntity> adminOptional = adminRepository.findById(adminId);
+
+        if (adminOptional.isPresent()) {
+            AdminEntity existingAdmin = adminOptional.get();
+
+            // Update the existing admin with the new information
+            existingAdmin.setFirstName(updatedAdmin.getFirstName());
+            existingAdmin.setLastName(updatedAdmin.getLastName());
+            existingAdmin.setGender(updatedAdmin.getGender());
+            existingAdmin.setAddress(updatedAdmin.getAddress());
+
+            // Save the updated admin back to the repository
+            adminRepository.save(existingAdmin);
+
+            return true;
+        }
+
+        // Patient with the given ID not found
+        return false;
+    }
+
 }
 
 

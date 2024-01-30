@@ -1,6 +1,7 @@
 package com.hospital.service;
 
 
+import com.hospital.dto.Review;
 import com.hospital.dto.Specialization;
 
 
@@ -15,6 +16,8 @@ public interface  SpecializationService {
 
 
     Boolean removeSpecialization(Long specializationId);
+
+    boolean updateSpecialization(Long specializationId, Specialization updatedSpecialization);
 
 
 }

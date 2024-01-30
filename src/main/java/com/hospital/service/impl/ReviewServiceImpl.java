@@ -75,6 +75,28 @@ public  class ReviewServiceImpl implements ReviewService {
         return false;
     }
 
+    //Update review
+    public boolean updateReview(Long reviewId, Review updatedReview) {
+        Optional<ReviewEntity> reviewOptional = reviewRepository.findById(reviewId);
+
+        if (reviewOptional.isPresent()) {
+            ReviewEntity existingReview = reviewOptional.get();
+
+            // Update the existing review with the new information
+            existingReview.setReviewNumber(updatedReview.getReviewNumber());
+            existingReview.setRating(updatedReview.getRating());
+            existingReview.setComment(updatedReview.getComment());
+
+            // Save the updated review back to the repository
+            reviewRepository.save(existingReview);
+
+            return true;
+        }
+
+        // Patient with the given ID not found
+        return false;
+    }
+
 }
 
 

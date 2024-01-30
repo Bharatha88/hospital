@@ -85,6 +85,30 @@ public  class AppointmentServiceImpl implements AppointmentService {
         return false;
     }
 
+    //Update appointment
+    public boolean updateAppointment(Long appointmentId, Appointment updatedAppointment) {
+        Optional<AppointmentEntity> appointmentOptional = appointmentRepository.findById(appointmentId);
+
+        if (appointmentOptional.isPresent()) {
+            AppointmentEntity existingAppointment = appointmentOptional.get();
+
+            // Update the existing appointment with the new information
+            existingAppointment.setAppointmentNumber(updatedAppointment.getAppointmentNumber());
+            existingAppointment.setDoctorName(updatedAppointment.getDoctorName());
+            existingAppointment.setPatientName(updatedAppointment.getPatientName());
+            existingAppointment.setStatus(updatedAppointment.getStatus());
+            existingAppointment.setDateAndTime(updatedAppointment.getDateAndTime());
+
+            // Save the updated appointment back to the repository
+            appointmentRepository.save(existingAppointment);
+
+            return true;
+        }
+
+        // Patient with the given ID not found
+        return false;
+    }
+
 }
 
 

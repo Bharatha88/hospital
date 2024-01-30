@@ -79,6 +79,29 @@ public  class  PrescriptionServiceImpl  implements PrescriptionService  {
         return false;
     }
 
+    //Update prescription
+    public boolean updatePrescription(Long prescriptionId, Prescription updatedPrescription) {
+        Optional<PrescriptionEntity> prescriptionOptional = prescriptionRepository.findById(prescriptionId);
+
+        if (prescriptionOptional.isPresent()) {
+            PrescriptionEntity existingPrescription = prescriptionOptional.get();
+
+            // Update the existing prescription with the new information
+            existingPrescription.setPrescriptionNumber(updatedPrescription.getPrescriptionNumber());
+            existingPrescription.setAdvice(updatedPrescription.getAdvice());
+            existingPrescription.setMedicine(updatedPrescription.getMedicine());
+            existingPrescription.setRemark(updatedPrescription.getRemark());
+
+            // Save the updated prescription back to the repository
+            prescriptionRepository.save(existingPrescription);
+
+            return true;
+        }
+
+        // Patient with the given ID not found
+        return false;
+    }
+
 }
 
 

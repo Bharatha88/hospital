@@ -3,6 +3,8 @@ package com.hospital.controller;
 import com.hospital.dto.Doctor;
 import com.hospital.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -37,6 +39,23 @@ public class DoctorController {
             return Collections.singletonMap("status","Record removed");
         }
         return Collections.singletonMap("status","Appointment not found");
+    }
+
+    //Update doctor
+    @PutMapping("/{doctorId}")
+    public ResponseEntity<Map<String, String>> updateDoctor(
+            @PathVariable Long doctorId,
+            @RequestBody Doctor updatedDoctor) {
+
+        boolean success = service.updateDoctor(doctorId, updatedDoctor);
+
+        if (success) {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(Collections.singletonMap("status", "Record updated successfully"));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Collections.singletonMap("status", "Bill not found"));
+        }
     }
 
 }

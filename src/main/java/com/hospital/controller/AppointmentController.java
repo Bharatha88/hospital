@@ -2,9 +2,10 @@ package com.hospital.controller;
 
 import com.hospital.dao.AppointmentEntity;
 import com.hospital.dto.Appointment;
-import com.hospital.dto.Patient;
 import com.hospital.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -52,6 +53,23 @@ public class AppointmentController {
             return Collections.singletonMap("status","Record removed");
         }
         return Collections.singletonMap("status","Appointment not found");
+    }
+
+    //Update appointment
+    @PutMapping("/{appointmentId}")
+    public ResponseEntity<Map<String, String>> updateAppointment(
+            @PathVariable Long appointmentId,
+            @RequestBody Appointment updatedAppointment) {
+
+        boolean success = service.updateAppointment(appointmentId, updatedAppointment);
+
+        if (success) {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(Collections.singletonMap("status", "Record updated successfully"));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Collections.singletonMap("status", "Appointment not found"));
+        }
     }
 
 }

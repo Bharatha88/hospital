@@ -86,6 +86,29 @@ public  class DoctorServiceImpl implements DoctorService {
         return false;
     }
 
+    //Update doctor
+    public boolean updateDoctor(Long doctorId, Doctor updatedDoctor) {
+        Optional<DoctorEntity> doctorOptional = doctorRepository.findById(doctorId);
+
+        if (doctorOptional.isPresent()) {
+            DoctorEntity existingDoctor = doctorOptional.get();
+
+            // Update the existing doctor with the new information
+            existingDoctor.setFirstName(updatedDoctor.getFirstName());
+            existingDoctor.setLastName(updatedDoctor.getLastName());
+            existingDoctor.setAge(updatedDoctor.getAge());
+            existingDoctor.setExperience(updatedDoctor.getExperience());
+
+            // Save the updated doctor back to the repository
+            doctorRepository.save(existingDoctor);
+
+            return true;
+        }
+
+        // Patient with the given ID not found
+        return false;
+    }
+
 
 }
 

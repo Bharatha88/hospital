@@ -1,6 +1,7 @@
 package com.hospital.service;
 
 import com.hospital.dao.AppointmentEntity;
+import com.hospital.dto.Admin;
 import com.hospital.dto.Appointment;
 
 
@@ -19,6 +20,8 @@ public interface  AppointmentService {
     Iterable<AppointmentEntity> retrieveAppointmentByPatientName(String patientName);
 
     Boolean removeAppointment(Long appointmentId);
+
+    boolean updateAppointment(Long appointmentId, Appointment updatedAppointment);
 
 
 }

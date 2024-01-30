@@ -19,5 +19,7 @@ public interface PatientService {
 
     Boolean removePatient(Long patientId);
 
+    boolean updatePatient(Long patientId, Patient updatedPatient);
+
 
 }

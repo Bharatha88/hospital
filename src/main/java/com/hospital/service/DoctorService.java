@@ -2,6 +2,7 @@ package com.hospital.service;
 
 
 import com.hospital.dao.DoctorEntity;
+import com.hospital.dto.Bill;
 import com.hospital.dto.Doctor;
 
 
@@ -19,6 +20,8 @@ public interface  DoctorService {
     Iterable<DoctorEntity> retrieveDoctorByLastName(String lastName);
 
     Boolean removeDoctor(Long doctorId);
+
+    boolean updateDoctor(Long doctorId, Doctor updatedDoctor);
 
 
 }

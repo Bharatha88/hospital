@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public  class PatientServiceImpl implements PatientService {
@@ -74,6 +71,7 @@ public  class PatientServiceImpl implements PatientService {
         return patientRepository.findAllByLastName(lastName);
     }
 
+    //Delete patient
     public Boolean removePatient(Long patientId) {
         //using JPA
         Optional<PatientEntity> patientById = patientRepository.findById(patientId);
@@ -84,8 +82,30 @@ public  class PatientServiceImpl implements PatientService {
         return false;
         }
 
+        //Update patient
+    public boolean updatePatient(Long patientId, Patient updatedPatient) {
+        Optional<PatientEntity> patientOptional = patientRepository.findById(patientId);
 
+        if (patientOptional.isPresent()) {
+            PatientEntity existingPatient = patientOptional.get();
+
+            // Update the existing patient with the new information
+            existingPatient.setFirstName(updatedPatient.getFirstName());
+            existingPatient.setLastName(updatedPatient.getLastName());
+            existingPatient.setDob(updatedPatient.getDob());
+            existingPatient.setPhoneNumber(updatedPatient.getPhoneNumber());
+
+            // Save the updated patient back to the repository
+            patientRepository.save(existingPatient);
+
+            return true;
+        }
+
+        // Patient with the given ID not found
+        return false;
+    }
 }
+
 
 
 

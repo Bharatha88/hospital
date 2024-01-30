@@ -2,7 +2,9 @@ package com.hospital.service.impl;
 
 
 
+import com.hospital.dao.ReviewEntity;
 import com.hospital.dao.SpecializationEntity;
+import com.hospital.dto.Review;
 import com.hospital.dto.Specialization;
 import com.hospital.repository.SpecializationRepository;
 import com.hospital.service.SpecializationService;
@@ -62,6 +64,27 @@ public  class SpecializationServiceImpl implements SpecializationService {
         }
         return false;
     }
+
+    //Update specialization
+    public boolean updateSpecialization(Long specializationId, Specialization updatedSpecialization) {
+        Optional<SpecializationEntity> specializationOptional = specializationRepository.findById(specializationId);
+
+        if (specializationOptional.isPresent()) {
+            SpecializationEntity existingSpecialization = specializationOptional.get();
+
+            // Update the existing specialization with the new information
+            existingSpecialization.setSpecializationSection(updatedSpecialization.getSpecializationSection());
+
+            // Save the updated specialization back to the repository
+            specializationRepository.save(existingSpecialization);
+
+            return true;
+        }
+
+        // Patient with the given ID not found
+        return false;
+    }
+
 
 }
 

@@ -1,6 +1,7 @@
 package com.hospital.service;
 
 import com.hospital.dao.BillEntity;
+import com.hospital.dto.Appointment;
 import com.hospital.dto.Bill;
 
 import java.util.List;
@@ -16,6 +17,8 @@ public interface BillService {
 
 
     Boolean removeBill(Long billId);
+
+    boolean updateBill(Long billId, Bill updatedBill);
 
 
 }
